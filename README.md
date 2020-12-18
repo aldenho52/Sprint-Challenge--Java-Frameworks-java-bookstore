@@ -50,9 +50,20 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. Can you explain exception handling in your application?
+
+There are custom implemented exception handlers in this project. Exception handling is used to send back custom exception messages to the client. You can see this in the ResourceNotFoundException, which replaces EntityNotFoundExceptions in handling endpoint exceptions.
+
 2. Can you explain your user authentication flow?
+
+First the client must be authorized. User authentication comes next, with the username and login credentials being checked or through a existing access token. The authentication manager then checks if the login credentials pass, handling them a access token. IF an access token is found, the user is given permission to access certain endpoints.
+
 3. Can you show me your unit tests and describe how they work?
+
+Yes my unit tests are found in the testing directoru of my project. They work by autowiring the service/controller you want to test. You then create a mock environment and use other mock services/repos you need to test the unit. We do this to keep unit testing isolated. Unit testing works by testig a mock database or a real one, and matching expected results with actual results. If what we expect matches what we get, we can be confident that our application runs how we want it to. 
+
 4. Can you show how you deployed your application to a cloud service with a persistent database?
+
+Yes I deployed my application to a cloud service called Heroku and the database is persistent by using API calls through postman. I've set the settings of my application to be on and updated without erasing data. Deploying an application requires you to link its env variables to heroku then deploying it using maven in intellij.
 
 ## Instructions
 
