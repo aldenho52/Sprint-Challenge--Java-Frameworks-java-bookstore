@@ -74,6 +74,13 @@ public class BookServiceImplTest
         assertEquals(4, bookService.findAll().size());
     }
 
+    @Test(expected = ResourceNotFoundException.class)
+    public void deleteNotFound()
+    {
+        bookService.delete(5050);
+        assertEquals(4, bookService.findAll().size());
+    }
+
     @Test
     public void save()
     {
@@ -85,6 +92,25 @@ public class BookServiceImplTest
         Book b1 = new Book("Flatterland", "9780738206752", 2001, s1);
         b1.getWrotes()
             .add(new Wrote(a6, new Book()));
+
+        Book book1 = bookService.save(b1);
+
+        assertEquals("9780738206752",
+            book1.getIsbn());
+    }
+
+    @Test(expected = ResourceNotFoundException.class)
+    public void saveputnotfound()
+    {
+        Section s1 = new Section("Fiction");
+        s1.setSectionid(21);
+        Author a6 = new Author("Ian", "Stewart");
+        a6.setAuthorid(20);
+
+        Book b1 = new Book("Flatterland", "9780738206752", 2001, s1);
+        b1.getWrotes()
+            .add(new Wrote(a6, new Book()));
+        b1.setBookid(1000);
 
         Book book1 = bookService.save(b1);
 
@@ -104,11 +130,18 @@ public class BookServiceImplTest
         b1.getWrotes()
             .add(new Wrote(a6, new Book()));
 
-        
+
+        bookService.update(b1, 28);
+        Book checkBookUpdate = bookService.findBookById(28);
+
+        assertEquals("Flatterland",
+            checkBookUpdate.getTitle());
     }
 
     @Test
-    public void deleteAll()
+    public void z_deleteAll()
     {
+        bookService.deleteAll();
+        assertEquals(0, bookService.findAll().size());
     }
 }
