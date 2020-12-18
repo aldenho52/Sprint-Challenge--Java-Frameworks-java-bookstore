@@ -8,8 +8,10 @@ import com.lambdaschool.bookstore.models.Section;
 import com.lambdaschool.bookstore.models.Wrote;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +24,7 @@ import static junit.framework.TestCase.assertEquals;
 //**********
 // Note security is handled at the controller, hence we do not need to worry about security here!
 //**********
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BookServiceImplTest
 {
 
@@ -43,14 +46,14 @@ public class BookServiceImplTest
     }
 
     @Test
-    public void findAll()
+    public void a_findAll()
     {
 
         assertEquals(5, bookService.findAll().size());
     }
 
     @Test
-    public void findBookById()
+    public void b_findBookById()
     {
         assertEquals("Flatterland",
             bookService.findBookById(26)
