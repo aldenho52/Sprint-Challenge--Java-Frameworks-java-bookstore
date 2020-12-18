@@ -220,8 +220,23 @@ public class BookControllerTest
     }
 
     @Test
-    public void updateFullBook()
+    public void updateFullBook() throws Exception
     {
+        String apiUrl = "/books/book/{bookid}";
+
+        Mockito.when(bookService.update(any(Book.class),
+            any(Long.class)))
+            .thenReturn(bookList.get(0));
+
+        RequestBuilder rb = MockMvcRequestBuilders.put(apiUrl,
+            100L)
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON)
+            .content("{\"lord of the rings\": \"2834823789\", \"1934\": \"s1\"}");
+
+        mockMvc.perform(rb)
+            .andExpect(status().is2xxSuccessful())
+            .andDo(MockMvcResultHandlers.print());
     }
 
     @Test

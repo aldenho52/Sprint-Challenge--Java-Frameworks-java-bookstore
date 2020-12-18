@@ -95,6 +95,16 @@ public class BookServiceImplTest
     @Test
     public void update()
     {
+        Section s1 = new Section("Fiction");
+        s1.setSectionid(21);
+        Author a6 = new Author("Ian", "Stewart");
+        a6.setAuthorid(20);
+
+        Book b1 = new Book("Flatterland", "9780738206752", 2001, s1);
+        b1.getWrotes()
+            .add(new Wrote(a6, new Book()));
+
+        
     }
 
     @Test
